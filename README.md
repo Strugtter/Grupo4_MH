@@ -1,6 +1,6 @@
 
 
-# Nombre del Proyecto
+# Eventos - Grupo 6
 
 Breve descripción del proyecto
 
