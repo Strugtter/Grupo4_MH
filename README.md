@@ -16,5 +16,5 @@ Instrucciones para contribuir al proyecto y las pautas a seguir para colaborar.
 
 - Natalia García Lopez
 - Robinson Gerardo Aguirre
-- Guillermo Leon Botina
+- Guillermo Leon
 - Camilo Andres Botina
