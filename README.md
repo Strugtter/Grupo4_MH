@@ -1,6 +1,6 @@
 
 
-# Eventos - Grupo 6
+# MERN - Eventos - Grupo 4
 
 Breve descripción del proyecto
 
