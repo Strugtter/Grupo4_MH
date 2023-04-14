@@ -1,0 +1,55 @@
+.selected {
+    background-color: #8E4A49;
+    color: #fbfbfb;
+    border-radius: 6%;  
+}
+.d-item {
+    height: 300px;
+}
+.d-img {
+    height: 100%;
+    object-fit: cover;
+    filter:brightness(0.6);
+}
+.img-dt{
+    width: 500px;
+}
+.c-card{
+    background-color: #ffffff;
+}
+
+#nav {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+#nav button{
+font-size: 1.5rem;
+border: lightgrey solid 1px;
+padding: 0.3rem;
+margin: 0.3rem;
+}
+
+.tImg {
+    height: 150px;
+}
+
+.tCard {
+    height: 410px;
+}
+
+.dCard {
+    text-overflow: ellipsis;
+}
+.tBody {
+    height: 260px;
+}
+
+.tFoot{
+    height: 35px;
+}
+
+.tDec {
+    height: 160px;
+}
