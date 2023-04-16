@@ -126,3 +126,5 @@ function loadItemsFiltro(cardsFilter) {
     }
     //loadPageNav();
 }
+
+
