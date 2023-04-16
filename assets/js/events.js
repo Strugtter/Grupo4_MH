@@ -152,3 +152,18 @@ for (let i = 0; i < allEvents.length; i++) {
         `;
   }
 }
+
+
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+let arreglo = [];
+
+for (var i = 0; i < checkboxes.length; i++) {
+  checkboxes[i].addEventListener("click", function () {
+    if (this.checked) {
+      arreglo.push(this.value);
+    } else {
+      arreglo.splice(categorias.indexOf(this.value), 1);
+    }
+    console.log(arreglo);
+  });
+}
