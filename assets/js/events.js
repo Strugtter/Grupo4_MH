@@ -69,7 +69,17 @@ for (let i=0 ; i<(allEvents.length/itemsPerPage); i++){
 }
 
 
+let botonFilter = document.getElementById("boton")
+botonFilter.addEventListener("click", () => {
+let buscarInput = document.getElementById("buscarInput");
+console.log(allEvents);
+let cardsFilter = [];
+if(buscarInput.value){
+    cardsFilter = allEvents.filter(events => events.name.toLowerCase().trim().includes(buscarInput.value.toLowerCase().trim()))
+}
+console.log(cardsFilter);
 
+})
 
 
 
