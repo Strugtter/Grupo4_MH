@@ -9,23 +9,27 @@ let itemsPerPage = 4;
 loadItems();
 
 function loadItems() {
+  content.innerHTML = "";
+  for (
+    let i = pageIndex * itemsPerPage;
+    i < pageIndex * itemsPerPage + itemsPerPage;
+    i++
+  ) {
+    if (!allEvents[i]) {
+      break;
+    }
 
-    content.innerHTML = "";
-    for (let i = pageIndex * itemsPerPage; i < (pageIndex * itemsPerPage) + itemsPerPage; i++) {
+    const name = allEvents[i].name;
+    const img = allEvents[i].image;
+    const desc = allEvents[i].description;
+    const price = allEvents[i].price;
+    const categ = allEvents[i].category;
+    const dat = allEvents[i].date;
+    const pla = allEvents[i].place;
+    const capa = allEvents[i].capacity;
+    const assis = allEvents[i].assistance;
 
-        if (!allEvents[i]) { break }
-
-        const name = allEvents[i].name;
-        const img = allEvents[i].image;
-        const desc = allEvents[i].description;
-        const price = allEvents[i].price;
-        const categ = allEvents[i].category;
-        const dat = allEvents[i].date;
-        const pla = allEvents[i].place;
-        const capa = allEvents[i].capacity;
-        const assis = allEvents[i].assistance;
-
-        content.innerHTML += `
+    content.innerHTML += `
         <div class="col-lg-3 col-sm-6 ">
                 <div class="card p-3 tCard">
                 <div class="tImg">
@@ -43,67 +47,73 @@ function loadItems() {
                     </div>
                 </div>
             </div> `;
-
-
-    }
-    loadPageNav();
+  }
+  loadPageNav();
 }
-
-
 
 function loadPageNav() {
-    nav.innerHTML = "";
-    for (let i = 0; i < (allEvents.length / itemsPerPage); i++) {
-        const span = document.createElement("button");
-        span.innerHTML = i + 1;
-        span.addEventListener("click", (e) => {
-            pageIndex = e.target.innerHTML - 1;
-            loadItems();
-        });
-        if (i === pageIndex) {
-            span.style.backgroundColor = "black";
-            span.style.color = "white";
-        }
-        nav.append(span);
+  nav.innerHTML = "";
+  for (let i = 0; i < allEvents.length / itemsPerPage; i++) {
+    const span = document.createElement("button");
+    span.innerHTML = i + 1;
+    span.addEventListener("click", (e) => {
+      pageIndex = e.target.innerHTML - 1;
+      loadItems();
+    });
+    if (i === pageIndex) {
+      span.style.backgroundColor = "black";
+      span.style.color = "white";
     }
+    nav.append(span);
+  }
 }
 
-let botonFilter = document.getElementById("buscarBoton")
+let botonFilter = document.getElementById("buscarBoton");
 
 function filtrarCards() {
-    let buscarInput = document.getElementById("buscarInput");
-    let cardsFilter = [];
-    if (buscarInput.value) {
-        cardsFilter = allEvents.filter(events => events.name.toLowerCase().trim().includes(buscarInput.value.toLowerCase().trim()))
+  let buscarInput = document.getElementById("buscarInput");
+  let cardsFilter = [];
+  if (buscarInput.value) {
+    cardsFilter = allEvents.filter((events) =>
+      events.name
+        .toLowerCase()
+        .trim()
+        .includes(buscarInput.value.toLowerCase().trim())
+    );
 
-        if (cardsFilter.length === 0) {
-            console.log("Su busqueda no coincide");
-        } else {
-            loadItemsFiltro(cardsFilter);
-        }
+    if (cardsFilter.length === 0) {
+      console.log("Su busqueda no coincide");
+    } else {
+      loadItemsFiltro(cardsFilter);
     }
-    document.getElementById("buscarInput").value = "";
+  }
+  document.getElementById("buscarInput").value = "";
 }
-botonFilter.addEventListener("click", filtrarCards)
+botonFilter.addEventListener("click", filtrarCards);
 
 function loadItemsFiltro(cardsFilter) {
-    nav.innerHTML = "";
-    content.innerHTML = "";
-    for (let i = pageIndex * itemsPerPage; i < (pageIndex * itemsPerPage) + itemsPerPage; i++) {
+  nav.innerHTML = "";
+  content.innerHTML = "";
+  for (
+    let i = pageIndex * itemsPerPage;
+    i < pageIndex * itemsPerPage + itemsPerPage;
+    i++
+  ) {
+    if (!cardsFilter[i]) {
+      break;
+    }
 
-        if (!cardsFilter[i]) { break }
+    const name = cardsFilter[i].name;
+    const img = cardsFilter[i].image;
+    const desc = cardsFilter[i].description;
+    const price = cardsFilter[i].price;
+    const categ = cardsFilter[i].category;
+    const dat = cardsFilter[i].date;
+    const pla = cardsFilter[i].place;
+    const capa = cardsFilter[i].capacity;
+    const assis = cardsFilter[i].assistance;
 
-        const name = cardsFilter[i].name;
-        const img = cardsFilter[i].image;
-        const desc = cardsFilter[i].description;
-        const price = cardsFilter[i].price;
-        const categ = cardsFilter[i].category;
-        const dat = cardsFilter[i].date;
-        const pla = cardsFilter[i].place;
-        const capa = cardsFilter[i].capacity;
-        const assis = cardsFilter[i].assistance;
-
-        content.innerHTML += `
+    content.innerHTML += `
         <div class="col-lg-3 col-sm-6 ">
                 <div class="card p-3 tCard">
                 <div class="tImg">
@@ -121,8 +131,39 @@ function loadItemsFiltro(cardsFilter) {
                     </div>
                 </div>
             </div> `;
+  }
+  //loadPageNav();
+}
+
+const contenedorCategorias = document.getElementById("contenedorCategorias");
+
+const categorias = [];
+
+for (let i = 0; i < allEvents.length; i++) {
+  const categoria = allEvents[i].category;
+  if (!categorias.includes(categoria)) {
+    categorias.push(categoria);
+
+    contenedorCategorias.innerHTML += `
+        <li class="list-group-item">
+        <input type="checkbox" value="${categoria}" name="${categoria}" id="filtroCheck">
+        <label for="${categoria}">${categoria}</label>
+        </li>
+        `;
+  }
+}
 
 
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+let arreglo = [];
+
+for (var i = 0; i < checkboxes.length; i++) {
+  checkboxes[i].addEventListener("click", function () {
+    if (this.checked) {
+      arreglo.push(this.value);
+    } else {
+      arreglo.splice(categorias.indexOf(this.value), 1);
     }
-    //loadPageNav();
+    console.log(arreglo);
+  });
 }
