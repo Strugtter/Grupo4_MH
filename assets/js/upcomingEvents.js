@@ -42,7 +42,7 @@ function loadItems() {
                         <br>
                         <div class="d-flex justify-content-between tFoot">
                             <p class="card-text align-items-end"><small class="text-muted">Price $ ${price}</small></p>
-                            <a href="pages/details.html?nombre=${name}&descripcion=${desc}&imagen=${img}&precio=${price}&category=${categ}&date=${dat}&place=${pla}&capacity=${capa}&assistance=${assis}" class="btn btn-primary float-right">View details</a>
+                            <a href="../pages/details.html?nombre=${name}&descripcion=${desc}&imagen=${img}&precio=${price}&category=${categ}&date=${dat}&place=${pla}&capacity=${capa}&assistance=${assis}" class="btn btn-primary float-right">View details</a>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@ function loadItemsFiltro(cardsFilter) {
                         <br>
                         <div class="d-flex justify-content-between tFoot">
                             <p class="card-text align-items-end"><small class="text-muted">Price $ ${price}</small></p>
-                            <a href="pages/details.html?nombre=${name}&descripcion=${desc}&imagen=${img}&precio=${price}&category=${categ}&date=${dat}&place=${pla}&capacity=${capa}&assistance=${assis}" class="btn btn-primary float-right">View details</a>
+                            <a href="../pages/details.html?nombre=${name}&descripcion=${desc}&imagen=${img}&precio=${price}&category=${categ}&date=${dat}&place=${pla}&capacity=${capa}&assistance=${assis}" class="btn btn-primary float-right">View details</a>
                         </div>
                     </div>
                 </div>
