@@ -3,18 +3,17 @@ import { data } from "../data/data.js";
 const nav = document.getElementById("nav");
 const content = document.getElementById("card");
 let allEvents = data.eventos;
-let pageIndex = 0;
+let pageIndexAll = 0;
+let pageIndexFilter = 0;
 let itemsPerPage = 4;
+let eventosFiltrados = [];
+let cardsFilter = [];
+
 
 loadItems();
-
 function loadItems() {
   content.innerHTML = "";
-  for (
-    let i = pageIndex * itemsPerPage;
-    i < pageIndex * itemsPerPage + itemsPerPage;
-    i++
-  ) {
+  for ( let i = pageIndexAll * itemsPerPage; i < pageIndexAll * itemsPerPage + itemsPerPage; i++) {
     if (!allEvents[i]) {
       break;
     }
@@ -51,16 +50,35 @@ function loadItems() {
   loadPageNav();
 }
 
+
+
 function loadPageNav() {
   nav.innerHTML = "";
   for (let i = 0; i < allEvents.length / itemsPerPage; i++) {
     const span = document.createElement("button");
     span.innerHTML = i + 1;
     span.addEventListener("click", (e) => {
-      pageIndex = e.target.innerHTML - 1;
+      pageIndexAll = e.target.innerHTML - 1;
       loadItems();
     });
-    if (i === pageIndex) {
+    if (i === pageIndexAll) {
+      span.style.backgroundColor = "black";
+      span.style.color = "white";
+    }
+    nav.append(span);
+  }
+}
+
+function loadPageNavF(cardsFilter) {
+  nav.innerHTML = "";
+  for (let i = 0; i < cardsFilter.length / itemsPerPage; i++) {
+    const span = document.createElement("button");
+    span.innerHTML = i + 1;
+    span.addEventListener("click", (e) => {
+      pageIndexFilter = e.target.innerHTML - 1 ;
+   //   loadItemsFiltro(cardsFilter);
+    });
+    if (i === pageIndexFilter) {
       span.style.backgroundColor = "black";
       span.style.color = "white";
     }
@@ -69,12 +87,12 @@ function loadPageNav() {
 }
 
 let botonFilter = document.getElementById("buscarBoton");
-
 function filtrarCards() {
   let buscarInput = document.getElementById("buscarInput");
-  let cardsFilter = [];
+  let eventsArray = eventosFiltrados.length > 0 ? eventosFiltrados : allEvents; 
+
   if (buscarInput.value) {
-    cardsFilter = allEvents.filter((events) =>
+    cardsFilter = eventsArray.filter((events) =>
       events.name
         .toLowerCase()
         .trim()
@@ -82,27 +100,39 @@ function filtrarCards() {
     );
 
     if (cardsFilter.length === 0) {
-      console.log("Su busqueda no coincide");
+      Swal.fire({
+        title: 'Esta seguro de su busqueda',
+        text: "¡La tarjeta no se encontro!",
+        icon: 'Advertencia',
+        showCancelButton: false,
+        confirmButtonColor: 'red',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '!Intentalo de nuevo¡'
+    })
+
+                       
     } else {
+      loadPageNavF(cardsFilter); 
       loadItemsFiltro(cardsFilter);
     }
+
   }
   document.getElementById("buscarInput").value = "";
 }
 botonFilter.addEventListener("click", filtrarCards);
 
-function loadItemsFiltro(cardsFilter) {
+
+function loadItemsFiltro(cardsFilter) {  
   nav.innerHTML = "";
   content.innerHTML = "";
-  for (
-    let i = pageIndex * itemsPerPage;
-    i < pageIndex * itemsPerPage + itemsPerPage;
-    i++
+  for ( let i = 0; i < allEvents.length; i++  
+   // let i = pageIndexFilter * itemsPerPage;
+   // i < pageIndexFilter * itemsPerPage + itemsPerPage;
+   // i++
   ) {
     if (!cardsFilter[i]) {
       break;
     }
-
     const name = cardsFilter[i].name;
     const img = cardsFilter[i].image;
     const desc = cardsFilter[i].description;
@@ -112,17 +142,35 @@ function loadItemsFiltro(cardsFilter) {
     const pla = cardsFilter[i].place;
     const capa = cardsFilter[i].capacity;
     const assis = cardsFilter[i].assistance;
-
+    content.innerHTML += `
+        <div class="col-lg-3 col-sm-6 ">
+                <div class="card p-3 tCard">
+                <div class="tImg">
+                    <img src="${img}" class="card-img-top shadow-lg bg-body-tertiary rounded tImg" alt="${name}"></div>
+                    <div class="card-body tBody">
+                    <div class="tDec">
+                        <h5 id="tituloCard" class="card-title text-center">${name}</h5>
+                        <p class="card-text text-center dCard">${desc}</p>
+                    </div>
+                        <br>
+                        <div class="d-flex justify-content-between tFoot">
+                            <p class="card-text align-items-end"><small class="text-muted">Price $ ${price}</small></p>
+                            <a href="pages/details.html?nombre=${name}&descripcion=${desc}&imagen=${img}&precio=${price}&category=${categ}&date=${dat}&place=${pla}&capacity=${capa}&assistance=${assis}" class="btn btn-primary float-right">View details</a>
+                        </div>
+                    </div>
+                </div>
+            </div> `;
+  }
+ // loadPageNavF(cardsFilter);
+}
 
 const contenedorCategorias = document.getElementById("contenedorCategorias");
-
 const categorias = [];
-
+console.log(categorias);
 for (let i = 0; i < allEvents.length; i++) {
   const categoria = allEvents[i].category;
   if (!categorias.includes(categoria)) {
     categorias.push(categoria);
-
     contenedorCategorias.innerHTML += `
         <li class="list-group-item">
         <input type="checkbox" value="${categoria}" name="${categoria}" id="filtroCheck">
@@ -132,16 +180,28 @@ for (let i = 0; i < allEvents.length; i++) {
   }
 }
 
-
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 let arreglo = [];
-
+// Obtener todos los eventos al cargar la página
+let todosLosEventos = data.eventos;
 for (var i = 0; i < checkboxes.length; i++) {
   checkboxes[i].addEventListener("click", function () {
     if (this.checked) {
       arreglo.push(this.value);
     } else {
-      arreglo.splice(categorias.indexOf(this.value), 1);
+      let index = arreglo.indexOf(this.value);
+      if (index !== -1) {
+        arreglo.splice(index, 1);
+      }
+    }
+    eventosFiltrados = todosLosEventos.filter(evento => arreglo.includes(evento.category));
+    loadItemsFiltro(eventosFiltrados);
+
+
+    console.log(eventosFiltrados);
+    // Si el arreglo está vacío, mostrar todos los eventos
+    if (arreglo.length === 0) {
+      loadItems(todosLosEventos);
     }
     console.log(arreglo);
   });
