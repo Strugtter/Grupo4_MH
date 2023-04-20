@@ -11,7 +11,6 @@ let itemsPerPage = 4;
 let eventosFiltrados = [];
 let cardsFilter = [];
 
-
 loadItems();
 function loadItems() {
   content.innerHTML = "";
@@ -52,8 +51,6 @@ function loadItems() {
   loadPageNav();
 }
 
-
-
 function loadPageNav() {
   nav.innerHTML = "";
   for (let i = 0; i < allEvents.length / itemsPerPage; i++) {
@@ -78,7 +75,6 @@ function loadPageNavF(cardsFilter) {
     span.innerHTML = i + 1;
     span.addEventListener("click", (e) => {
       pageIndexFilter = e.target.innerHTML - 1 ;
-   //   loadItemsFiltro(cardsFilter);
     });
     if (i === pageIndexFilter) {
       span.style.backgroundColor = "black";
@@ -104,7 +100,7 @@ function filtrarCards() {
     if (cardsFilter.length === 0) {
       Swal.fire({
         title: 'Esta seguro de su busqueda',
-        text: "¡La tarjeta no se encontro!",
+        text: "¡El evento no se encontro!",
         icon: 'Advertencia',
         showCancelButton: false,
         confirmButtonColor: 'red',
@@ -112,25 +108,19 @@ function filtrarCards() {
         confirmButtonText: '!Intentalo de nuevo¡'
     })
 
-                       
     } else {
       loadPageNavF(cardsFilter); 
       loadItemsFiltro(cardsFilter);
     }
-
   }
   document.getElementById("buscarInput").value = "";
 }
 botonFilter.addEventListener("click", filtrarCards);
 
-
 function loadItemsFiltro(cardsFilter) {  
   nav.innerHTML = "";
   content.innerHTML = "";
   for ( let i = 0; i < allEvents.length; i++  
-   // let i = pageIndexFilter * itemsPerPage;
-   // i < pageIndexFilter * itemsPerPage + itemsPerPage;
-   // i++
   ) {
     if (!cardsFilter[i]) {
       break;
@@ -163,7 +153,6 @@ function loadItemsFiltro(cardsFilter) {
                 </div>
             </div> `;
   }
- // loadPageNavF(cardsFilter);
 }
 
 const contenedorCategorias = document.getElementById("contenedorCategorias");
@@ -184,8 +173,7 @@ for (let i = 0; i < allEvents.length; i++) {
 
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 let arreglo = [];
-// Obtener todos los eventos al cargar la página
-let todosLosEventos = data.eventos;
+let todosLosEventos = allEvents;
 for (var i = 0; i < checkboxes.length; i++) {
   checkboxes[i].addEventListener("click", function () {
     if (this.checked) {
@@ -198,10 +186,8 @@ for (var i = 0; i < checkboxes.length; i++) {
     }
     eventosFiltrados = todosLosEventos.filter(evento => arreglo.includes(evento.category));
     loadItemsFiltro(eventosFiltrados);
-
-
+    
     console.log(eventosFiltrados);
-    // Si el arreglo está vacío, mostrar todos los eventos
     if (arreglo.length === 0) {
       loadItems(todosLosEventos);
     }
