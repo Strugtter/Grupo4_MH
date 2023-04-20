@@ -11,8 +11,7 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../assets/styles/styles.css">
-    <link rel="shortcut icon" href="../assets/images/LogoAmazingEvents.png">
-    
+    <link rel="shortcut icon" href="../assets/images/LogoAmazingEvents.png">  
 </head>
 <body>
     <nav class="navbar bg-success-subtle navbar-expand-lg">
@@ -92,33 +91,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9">
-                <ul class="list-group list-group-horizontal form-check-inline">
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="check1">
-                        <label class="form-check-label stretched-link" for="check1">Category</label>
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="check2">
-                        <label class="form-check-labexl stretched-link" for="check2">Category</label>
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="check3">
-                        <label class="form-check-label stretched-link" for="check3">Category</label>
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="check4">
-                        <label class="form-check-label stretched-link" for="check4">Category</label>
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="check5">
-                        <label class="form-check-label stretched-link" for="check5">Category</label>
-                    </li>                        
+                <ul class="list-group list-group-horizontal form-check-inline" id="contenedorCategorias">                     
                 </ul>
             </div>
             <div class="col-lg-3">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Search" id="buscarInput" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit" id="buscarBoton">Search</button>
                 </form>
             </div>
         </div>
