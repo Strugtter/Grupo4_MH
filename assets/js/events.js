@@ -1,8 +1,15 @@
 import { data } from "../data/data.js";
+import  getDataFetch from "../../helpers/getData.js"
 
 const nav = document.getElementById("nav");
 const content = document.getElementById("card");
-let allEvents = data.eventos;
+const urlData = 'https://pro-talento.up.railway.app/api/amazing';
+let allEvents = [];
+
+document.addEventListener('DOMContentLoaded', async () => {
+  let {response} = await getDataFetch(urlData);
+  allEvents = response;
+
 let pageIndexAll = 0;
 let pageIndexFilter = 0;
 let itemsPerPage = 4;
@@ -169,9 +176,11 @@ for (let i = 0; i < allEvents.length; i++) {
   }
 }
 
+
+allEvents
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 let arreglo = [];
-let todosLosEventos = data.eventos;
+console.log(arreglo);
 for (var i = 0; i < checkboxes.length; i++) {
   checkboxes[i].addEventListener("click", function () {
     if (this.checked) {
@@ -182,13 +191,14 @@ for (var i = 0; i < checkboxes.length; i++) {
         arreglo.splice(index, 1);
       }
     }
-    eventosFiltrados = todosLosEventos.filter(evento => arreglo.includes(evento.category));
+    eventosFiltrados = allEvents.filter(evento => arreglo.includes(evento.category));
     loadItemsFiltro(eventosFiltrados);
 
     console.log(eventosFiltrados);
     if (arreglo.length === 0) {
-      loadItems(todosLosEventos);
+      loadItems(allEvents);
     }
     console.log(arreglo);
   });
 }
+})
