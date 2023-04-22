@@ -1,10 +1,10 @@
 import { data } from "../data/data.js";
 
 let eventosPasados = data.eventos.filter((e)=>e.date<data.fechaActual);
-
 const nav = document.getElementById("nav");
 const content = document.getElementById("card");
 let allEvents = eventosPasados;
+
 let pageIndexAll = 0;
 let pageIndexFilter = 0;
 let itemsPerPage = 4;
