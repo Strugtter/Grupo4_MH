@@ -1,4 +1,4 @@
-import { data } from "../data/data.js";
+//import { data } from "../data/data.js";
 import  getDataFetch from "../../helpers/getData.js"
 
 const nav = document.getElementById("nav");

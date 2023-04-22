@@ -1,9 +1,17 @@
-import { data } from "../data/data.js";
+//import { data } from "../data/data.js";
+import getDataFetch from "../../helpers/getData.js";
 
-let eventosPasados = data.eventos.filter((e)=>e.date<data.fechaActual);
+
+
+//let eventosPasados = data.eventos.filter((e)=>e.date<data.fechaActual);
+
+const urlData = 'https://pro-talento.up.railway.app/api/amazing?time=past'
 const nav = document.getElementById("nav");
 const content = document.getElementById("card");
-let allEvents = eventosPasados;
+document.addEventListener("DOMContentLoaded", async () => {
+  let {response} = await getDataFetch(urlData);
+
+let allEvents = response;
 
 let pageIndexAll = 0;
 let pageIndexFilter = 0;
@@ -194,3 +202,4 @@ for (var i = 0; i < checkboxes.length; i++) {
     console.log(arreglo);
   });
 }
+})
