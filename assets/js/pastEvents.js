@@ -1,9 +1,9 @@
-const nav = document.getElementById("nav");
+const content = document.getElementById("swiper-wrapper");//se cambia la id para poder guardar las card en el swiper
 const content = document.getElementById("card");
 let allEvents = fetchApi();
 
 function loadItems(allEvents) {
-  const content = document.getElementById("card");
+  const content = document.getElementById("swiper-wrapper");//se cambia la id para poder guardar las card en el swiper
   content.innerHTML = "";
   for (let i=0; i < allEvents.length; i++) {
     if (!allEvents[i]) {
