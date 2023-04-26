@@ -70,5 +70,44 @@ body {
 }
 
 img {
-    object-fit:cover;
+    object-fit: cover;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}  
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+} 
+
+.slide-container {
+    max-width: 95%;
+    width: 90%;
+    padding: 40px 0;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+}
+
+.slide-content {
+    height: 490px;
+    margin: 0 40px;
+    overflow: hidden;
+}
+.swiper-wrapper { 
+    margin-left: 2%;
 }
