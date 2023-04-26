@@ -18,7 +18,8 @@ function loadItems(allEvents) {
     
 
     content.innerHTML += `
-        <div class="col-lg-3 col-sm-6 ">
+    <div class="swiper-slide">
+        <div class="col-lg-10 col-sm-8 ">
                 <div class="card p-3 tCard">
                 <div class="tImg">
                     <img src="${img}" class="card-img-top shadow-lg bg-body-tertiary rounded tImg" alt="${name}"></div>
@@ -34,7 +35,8 @@ function loadItems(allEvents) {
                         </div>
                     </div>
                 </div>
-            </div> `;
+            </div>
+            </div>`;
   }
 }
 
