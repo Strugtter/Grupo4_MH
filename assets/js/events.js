@@ -28,7 +28,7 @@ function loadItems(allEvents) {
                         <br>
                         <div class="d-flex justify-content-between tFoot">
                             <p class="card-text align-items-end"><small class="text-muted">Price $ ${price}</small></p>
-                            <a href="../pages/details.html?id=${id}" class="btn btn-primary float-right">View details</a>
+                            <a href="pages/details.html?id=${id}" class="btn btn-primary float-right">View details</a>
                         </div>
                     </div>
                 </div>
