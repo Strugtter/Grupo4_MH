@@ -1,5 +1,4 @@
 const content = document.getElementById("swiper-wrapper");//se cambia la id para poder guardar las card en el swiper
-const content = document.getElementById("card");
 let allEvents = fetchApi();
 
 function loadItems(allEvents) {
