@@ -1,15 +1,13 @@
-const nav = document.getElementById("nav");
-const content = document.getElementById("card");
+const content = document.getElementById("swiper-wrapper");//se cambia la id para poder guardar las card en el swiper
 let allEvents = fetchApi();
 
 function loadItems(allEvents) {
-  const content = document.getElementById("card");
+  const content = document.getElementById("swiper-wrapper");//se cambia la id para poder guardar las card en el swiper
   content.innerHTML = "";
   for (let i = 0; i < allEvents.length; i++) {
     if (!allEvents[i]) {
       break;
     }
-
     const id = allEvents[i].id;
     const name = allEvents[i].name;
     const img = allEvents[i].image;
@@ -17,7 +15,8 @@ function loadItems(allEvents) {
     const price = allEvents[i].price;
 
     content.innerHTML += `
-        <div class="col-lg-3 col-sm-6 ">
+    <div class="swiper-slide">
+        <div class="col-lg-10 col-sm-8 ">
                 <div class="card p-3 tCard">
                 <div class="tImg">
                     <img src="${img}" class="card-img-top shadow-lg bg-body-tertiary rounded tImg" alt="${name}"></div>
@@ -33,9 +32,23 @@ function loadItems(allEvents) {
                         </div>
                     </div>
                 </div>
-            </div> `;
+            </div>
+            </div>`;
   }
 }
+//control del swiper
+let swiper = new Swiper(".slide-content", {
+  slidesPerView: 1,
+  slidesPerGroup: 1,
+  spaceBetween: 10,
+  grabCursor: 'true',
+  navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+  breakpoints: {
+      540: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 40 },
+      820: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 40 },
+      1240: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 40 },
+  }
+});
 
 async function fetchApi() {
   try {
