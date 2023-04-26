@@ -103,9 +103,16 @@
         </div>
     </div>    
     <br><br>
-    <div class="container">
-        <div class="row justify-content-center" id="card"></div>
-        <div class="m-2" id="nav"> </div>
+    <!-- se adiciona contenedor swiper que reemplaza al anterior contenedor donde se guardaban las cards -->
+    <div class="justify-content-center slide-container swiper">
+        <div class="slide-content">
+            <div class="swiper-wrapper" id="swiper-wrapper">
+
+            </div>
+        </div>
+        <div class="swiper-button-next swiper-navBtn"></div>
+        <div class="swiper-button-prev swiper-navBtn"></div>
+        <div class="swiper-pagination"></div>
     </div>
     <br><br>
     <footer class="bg-dark text-white d-flex justify-content-between bottom-0 w-100">
