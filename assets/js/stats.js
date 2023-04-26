@@ -1,4 +1,3 @@
-
 let categorysUp = document.getElementById('tableBody');
 let url = 'https://pro-talento.up.railway.app/api/amazing?time=upcoming';
 
@@ -26,29 +25,35 @@ async function loadStatsUp(url) {
         let celda2 = fila.insertCell();
         let celda3 = fila.insertCell();
         celda1.innerHTML = category;
-        celda2.innerHTML = revenues.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        celda2.innerHTML = revenues.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
         celda3.innerHTML = percentOfAsistence.toFixed(0)+'%';
     })
 } loadStatsUp(url)
 
-import getDataFetch from "../../helpers/getData.js";
-
 const urlData = 'https://pro-talento.up.railway.app/api/amazing?time=past'
 
 
-document.addEventListener("DOMContentLoaded", async () => {
+async function statsPast (urlData) {
     const statsPast = document.getElementById("pasados");
-    let {response} = await getDataFetch(urlData);
+    let response = await fetch(urlData);
+    response = await response.json();
+    response = response.response
     let allEvents = response;
     let categorias = [...new Set(allEvents.map(category => category.category))]//modifico el arreglo solo a categorias para mostrarlo en la tabla
     console.log(categorias)
-    categorias.forEach((category)=> { 
+    categorias.forEach((category)=> {
+        let categoriasAgrupadas = allEvents.filter( each => each.category == category);
+        let ingresosPorCategoria = categoriasAgrupadas.map(each => each.price*each.assistance).reduce((acumulador,valor)=>acumulador+valor);
+        let totalAsitencia = categoriasAgrupadas.map(each => each.assistance*100).reduce((acumulador, valor)=>acumulador+valor);
+        let totalCapacidad = categoriasAgrupadas.map(each => each.capacity).reduce((acumulador, valor)=>acumulador+valor);
+        let porcentajePorCategoria = totalAsitencia / totalCapacidad;
+        console.log(porcentajePorCategoria)
         statsPast.innerHTML += `<tr>
         <td>${category}</td>
-        <td></td>
-        <td></td>
+        <td>${ingresosPorCategoria.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
+        <td>${porcentajePorCategoria.toFixed(0)+'%'}</td>
         </tr>`;
 
     }) 
-})
-
+}
+statsPast (urlData)
