@@ -1,10 +1,13 @@
-const nav = document.getElementById("nav");
-const content = document.getElementById("card");
+const content = document.getElementById("swiper-wrapper");//se cambia la id para poder guardar las card en el swiper
 let allEvents = fetchApi();
+const alerta = document.getElementById('alerta');
+const caja = document.getElementById('caja');
 
 function loadItems(allEvents) {
-  const content = document.getElementById("card");
+  caja.style.display = "block";
+  const content = document.getElementById("swiper-wrapper");//se cambia la id para poder guardar las card en el swiper
   content.innerHTML = "";
+  alerta.innerHTML = '';
   for (let i=0; i < allEvents.length; i++) {
     if (!allEvents[i]) {
       break;
@@ -18,7 +21,8 @@ function loadItems(allEvents) {
     
 
     content.innerHTML += `
-        <div class="col-lg-3 col-sm-6 ">
+    <div class="swiper-slide">
+        <div class="col-lg-10 col-sm-8 ">
                 <div class="card p-3 tCard">
                 <div class="tImg">
                     <img src="${img}" class="card-img-top shadow-lg bg-body-tertiary rounded tImg" alt="${name}"></div>
@@ -34,9 +38,24 @@ function loadItems(allEvents) {
                         </div>
                     </div>
                 </div>
-            </div> `;
+            </div>
+            </div>`;
   }
 }
+
+//control del swiper
+let swiper = new Swiper(".slide-content", {
+  slidesPerView: 1,
+  slidesPerGroup: 1,
+  spaceBetween: 10,
+  grabCursor: 'true',
+  navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+  breakpoints: {
+      540: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 40 },
+      820: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 40 },
+      1240: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 40 },
+  }
+});
 
 async function fetchApi() {
   try {
@@ -88,7 +107,16 @@ async function filterData() {
     response = await response.json();
     loadItems(response.response);
     if (response.response.length == 0){
-      content.innerHTML = `Su busqueda no coincide con nuestros eventos, por favor vuelva a intentarlo.`
+      // content.innerHTML = `Su busqueda no coincide con nuestros eventos, por favor vuelva a intentarlo.`
+      caja.style.display = "none";
+      // caja.innerHTML = '';
+      content.innerHTML = '';
+      // content.innerHTML = `Su busqueda no coincide con nuestros eventos, por favor vuelva a intentarlo.`;
+      alerta.innerHTML = `
+      <div class="alert alert-warning" role="alert">
+        Su busqueda no coincide con nuestros eventos, por favor vuelva a intentarlo.
+      </div>      
+      `;
     } else{
       loadItems(response.response);
     }

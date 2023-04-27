@@ -12,6 +12,9 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../assets/styles/styles.css">
     <link rel="shortcut icon" href="../assets/images/LogoAmazingEvents.png"> 
+        <!-- link swiper -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+        <!-- script swiper --><script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>    
 </head>
 <body class="d-flex flex-column">
     <nav class="navbar bg-success-subtle navbar-expand-lg">
@@ -103,9 +106,19 @@
         </div>
     </div>    
     <br><br>
-    <div class="container">
-        <div class="row justify-content-center" id="card"></div>
-        <div class="m-2" id="nav"> </div>
+    <div class="container" id="alerta">
+      
+    </div>
+    <!-- se adiciona contenedor swiper que reemplaza al anterior contenedor donde se guardaban las cards -->
+    <div class="justify-content-center slide-container swiper" id="caja">
+        <div class="slide-content">
+            <div class="swiper-wrapper" id="swiper-wrapper">
+
+            </div>
+        </div>
+        <div class="swiper-button-next swiper-navBtn"></div>
+        <div class="swiper-button-prev swiper-navBtn"></div>
+        <div class="swiper-pagination"></div>
     </div>
     <br><br>
     <footer class="bg-dark text-white d-flex justify-content-between bottom-0 w-100">
