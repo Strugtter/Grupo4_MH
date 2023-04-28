@@ -3,6 +3,7 @@ let url = 'https://pro-talento.up.railway.app/api/amazing?time=upcoming';
 let api = "";
 
 async function loadStatsUp(url) {
+    let upComing = document.getElementById("upComing");
     let response = await fetch(url);
     response = await response.json()
     response = response.response;
@@ -19,13 +20,12 @@ async function loadStatsUp(url) {
         
         let percentOfAsistence = (EstimateTotal / capacityTotal)*100
     
-        let fila = categorysUp.insertRow(filas[2].rowIndex);
-        let celda1 = fila.insertCell();
-        let celda2 = fila.insertCell();
-        let celda3 = fila.insertCell();
-        celda1.innerHTML = category;
-        celda2.innerHTML = revenues.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
-        celda3.innerHTML = percentOfAsistence.toFixed(0)+'%';
+        upComing.innerHTML += `
+         <tr>
+         <td>${category}</td>
+        <td> ${revenues.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
+        <td>${percentOfAsistence.toFixed(0)+'%'}</td>
+        </tr>`;
     })
 } loadStatsUp(url)
 
