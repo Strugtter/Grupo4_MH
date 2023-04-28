@@ -68,9 +68,9 @@ async function EventsStats(api) {
         // console.log(lcapacity.capacity.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }));
         let content = document.getElementById('main-view');
         content.innerHTML = `
-        <td>${hatendance.name}</td>
-        <td>${latendance.name}</td>
-        <td>${lcapacity.name}</td>
+        <td>${hatendance.name+" - "+((hatendance.assistance*100)/hatendance.capacity).toFixed(0)+'%'}</td>
+        <td>${latendance.name+" - "+((latendance.assistance*100)/latendance.capacity).toFixed(0)+'%'}</td>
+        <td>${lcapacity.name+" - "+lcapacity.capacity+" "+"Aforo"}</td>
         `;    
 } EventsStats(urlData)
 
